@@ -16,7 +16,7 @@ import process.ProcessDefaultA;
  * 创建人:     huangyang
  * 创建时间:   2019/5/1 10:58
  */
-public class XmlReader {
+public class IocContainer {
 
     public static void main ( String[] args ) {
 
