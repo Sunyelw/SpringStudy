@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
+<!--<beans>-->
+
+    <!--<bean id="parent" class="dto.ParentUser">-->
+        <!--<property name="father" ref="myUser"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="son" class="dto.SonUser" />-->
+
+    <bean id="myUser" class="dto.MyUser" lazy-init="false" init-method="init" destroy-method="des">
+        <property name="id" value="1"/>
+        <property name="name" value="sun"/>
+        <!--<property name="son" ref="son" />-->
+    </bean>
+
+    <!-- ApplicationContext 容器系列会自动扫描配置的后置处理器 -->
+    <!--
+        如果有多个后置处理器
+        1、可以实现Ordered接口，返回值越大，优先级越低。（0 最高）
+        2、按在配置文件中的顺序取第一个
+
+        PS:
+
+        1、若第一个加载后置处理的返回为null，则其他的后置处理器并不会执行
+
+        2、后置处理器不管是否设置lazy-init属性，都会预先加载，因为初始化bean的时候会调用其before方法
+
+     -->
+    <bean id="processorB" class="process.ProcessDefaultB" />
+    <bean id="processorA" class="process.ProcessDefaultA" />
+</beans>
