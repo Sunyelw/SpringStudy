@@ -6,6 +6,7 @@ import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import process.ProcessDefaultA;
 
 /**
@@ -30,7 +31,7 @@ public class IocContainer {
     /**
      * ApplicationContext容器：
      */
-    static void applicationContextGet() {
+    private static void applicationContextGet() {
 
         System.out.println ( "applicationContextGet..." );
 
@@ -38,7 +39,7 @@ public class IocContainer {
 
         MyUser my = (MyUser) context.getBean ( "myUser" );
 
-//        System.out.println (null == my ? "null" : my.getName () );
+        System.out.println ( my.getName () );
 
     }
 
@@ -50,7 +51,7 @@ public class IocContainer {
         System.out.println (" listableBeanGet... ");
 
         // 1、先拿到 代表 BeanDefinition 的 Resource 对象(这里是文件形式)
-        ClassPathResource res = new ClassPathResource ( "myBean.xml" );
+        Resource res = new ClassPathResource ( "myBean.xml" );
 
         // 2、构建容器，这里用的 BeanFactory 系列
         DefaultListableBeanFactory factory = new DefaultListableBeanFactory ();

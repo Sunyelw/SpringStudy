@@ -14,13 +14,7 @@ import org.springframework.core.Ordered;
  */
 public class ProcessDefaultB implements BeanPostProcessor, Ordered {
 
-    /*
-    *
-    * 测试 后置处理器
-    *
-    * */
-
-
+    // before
     @Override
     public Object postProcessBeforeInitialization (Object bean, String beanName) throws BeansException {
 
@@ -29,6 +23,7 @@ public class ProcessDefaultB implements BeanPostProcessor, Ordered {
         return bean;
     }
 
+    // after
     @Override
     public Object postProcessAfterInitialization (Object bean, String beanName) throws BeansException {
 
