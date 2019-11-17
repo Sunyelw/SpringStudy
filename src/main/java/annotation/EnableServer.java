@@ -1,5 +1,6 @@
 package annotation;
 
+import dao.ServerImportBeanDefinitionRegistrar;
 import dao.ServerImportSelector;
 import dto.Server;
 import org.springframework.context.annotation.Import;
@@ -17,7 +18,7 @@ import java.lang.annotation.*;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@Import(ServerImportSelector.class)
+@Import(ServerImportBeanDefinitionRegistrar.class)
 public @interface EnableServer {
 
     /**

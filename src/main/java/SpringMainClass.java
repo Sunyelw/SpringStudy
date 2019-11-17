@@ -24,7 +24,7 @@ import java.io.IOException;
  */
 @EnableHelloAnnotation
 @ComponentScan(basePackages = "annotation") // 需要开启扫描
-@EnableServer(type = Server.Type.FTP) // Server.Type.FTP / Server.Type.HTTP
+@EnableServer(type = Server.Type.HTTP) // Server.Type.FTP / Server.Type.HTTP
 public class SpringMainClass {
 
     public static void main(String[] args){
@@ -38,7 +38,7 @@ public class SpringMainClass {
         context.refresh();
 
 //        // debug 出来的 beanName
-//        Server server = context.getBean("dto.FtpServer", Server.class);
+//        Server server = context.getBean("dto.HttpServer", Server.class);
         // 直接通过 Class 获取 Bean
         Server server = context.getBean(Server.class);
 
