@@ -1,5 +1,7 @@
 import annotation.EnableHelloAnnotation;
+import annotation.EnableServer;
 import dto.AnnoDao;
+import dto.Server;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
@@ -22,11 +24,26 @@ import java.io.IOException;
  */
 @EnableHelloAnnotation
 @ComponentScan(basePackages = "annotation") // 需要开启扫描
+@EnableServer(type = Server.Type.FTP) // Server.Type.FTP / Server.Type.HTTP
 public class SpringMainClass {
 
     public static void main(String[] args){
+        InterfaceEnable();
+    }
 
-        show();
+    // 基于接口驱动 @Enable 模块驱动开发
+    private static void InterfaceEnable() {
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+        context.register(SpringMainClass.class);
+        context.refresh();
+
+//        // debug 出来的 beanName
+//        Server server = context.getBean("dto.FtpServer", Server.class);
+        // 直接通过 Class 获取 Bean
+        Server server = context.getBean(Server.class);
+
+        server.start();
+        server.end();
     }
 
     // @Enable 模块 注解模式 开发
