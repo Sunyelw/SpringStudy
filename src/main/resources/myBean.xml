@@ -18,7 +18,11 @@
         <!--<property name="son" ref="son" />-->
     </bean>
 
+    <!-- 扫描目标包中的 Spring模式注解 注册成Bean -->
     <context:component-scan base-package="dto"/>
+
+    <!-- 注册 BeanProcessor - 注入类注解处理器 -->
+    <context:annotation-config/>
 
 
     <!-- ApplicationContext 容器系列会自动扫描配置的后置处理器 -->

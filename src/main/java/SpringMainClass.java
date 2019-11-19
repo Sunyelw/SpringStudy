@@ -1,7 +1,7 @@
 import annotation.EnableHelloAnnotation;
 import annotation.EnableServer;
-import dto.AnnoDao;
-import dto.Server;
+import dto.AnnotationDao;
+import dto.inter.Server;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
@@ -10,7 +10,7 @@ import org.springframework.core.type.AnnotationMetadata;
 import org.springframework.core.type.classreading.CachingMetadataReaderFactory;
 import org.springframework.core.type.classreading.MetadataReader;
 import org.springframework.core.type.classreading.MetadataReaderFactory;
-import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import java.io.IOException;
 
@@ -25,6 +25,7 @@ import java.io.IOException;
 @EnableHelloAnnotation
 @ComponentScan(basePackages = "annotation") // 需要开启扫描
 @EnableServer(type = Server.Type.HTTP) // Server.Type.FTP / Server.Type.HTTP
+@EnableWebMvc
 public class SpringMainClass {
 
     public static void main(String[] args){
@@ -58,14 +59,12 @@ public class SpringMainClass {
         String show = context.getBean("show", String.class);
 
         System.out.println("show: " + show);
-
     }
-
 
     private static void anno() {
         // 派生注解
         ApplicationContext app = new ClassPathXmlApplicationContext("myBean.xml");
-        AnnoDao ann = (AnnoDao) app.getBean("hy");
+        AnnotationDao ann = app.getBean("hy", AnnotationDao.class);
         System.out.println(ann.get());
 
         // 组合注解
@@ -74,18 +73,18 @@ public class SpringMainClass {
             MetadataReaderFactory factory = new CachingMetadataReaderFactory();
 
             // 2 获取 MetadataReader
-            MetadataReader reader = factory.getMetadataReader(AnnoDao.class.getName());
+            MetadataReader reader = factory.getMetadataReader(AnnotationDao.class.getName());
 
             // 3 拿到 AnnotationMetadata
             AnnotationMetadata annotationMetadata = reader.getAnnotationMetadata();
 
             // 4 获取注解
             for (String an : annotationMetadata.getAnnotationTypes()) {
-                System.out.println(AnnoDao.class.getName() + ": " + an);
+                System.out.println(AnnotationDao.class.getName() + ": " + an);
 
                 // 5 获取元注解
                 for (String bn : annotationMetadata.getMetaAnnotationTypes(an)) {
-                    System.out.println(AnnoDao.class.getName() + " bn: " + bn);
+                    System.out.println(AnnotationDao.class.getName() + " bn: " + bn);
                 }
             }
         } catch (IOException e) {

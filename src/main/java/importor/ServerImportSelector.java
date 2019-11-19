@@ -1,9 +1,9 @@
-package dao;
+package importor;
 
 import annotation.EnableServer;
 import dto.FtpServer;
 import dto.HttpServer;
-import dto.Server;
+import dto.inter.Server;
 import org.springframework.context.annotation.ImportSelector;
 import org.springframework.core.type.AnnotationMetadata;
 
@@ -12,7 +12,7 @@ import java.util.Set;
 
 /**
  * 项目名称:   pinkstone
- * 包:        dao
+ * 包:        importor
  * 类名称:     ServerImportSelector
  * 类描述:     基于接口编程实现的 @Enable 驱动模式 - 注解具体实现
  * 创建人:     huangyang

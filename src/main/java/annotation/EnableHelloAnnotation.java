@@ -1,5 +1,6 @@
 package annotation;
 
+import component.HelloConfiguration;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;

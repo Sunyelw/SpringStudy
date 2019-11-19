@@ -1,4 +1,4 @@
-package dao;
+package importor;
 
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionReaderUtils;
@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 
 /**
  * 项目名称:   pinkstone
- * 包:        dao
+ * 包:        importor
  * 类名称:     ServerImportSelector
  * 类描述:     基于接口编程实现的 @Enable 驱动模式 - 注解具体实现
  * 创建人:     huangyang

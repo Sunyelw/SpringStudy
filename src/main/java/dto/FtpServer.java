@@ -1,5 +1,6 @@
 package dto;
 
+import dto.inter.Server;
 import org.springframework.stereotype.Component;
 
 /**

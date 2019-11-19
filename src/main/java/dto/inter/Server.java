@@ -1,4 +1,4 @@
-package dto;
+package dto.inter;
 
 /**
  * 项目名称:   pinkstone

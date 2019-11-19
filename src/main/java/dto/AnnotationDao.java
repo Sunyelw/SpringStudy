@@ -12,10 +12,10 @@ import org.springframework.context.annotation.Bean;
  * 创建时间:   2019/11/17 8:14
  */
 @HyAnnotation(value = "hy")
-public class AnnoDao {
+public class AnnotationDao {
 
     @Bean
     public String get() {
-        return "I'm " + AnnoDao.class.getName();
+        return "I'm " + AnnotationDao.class.getName();
     }
 }
