@@ -45,6 +45,8 @@ public class SpringMainClass {
 
         server.start();
         server.end();
+
+        context.close();
     }
 
     // @Enable 模块 注解模式 开发
@@ -52,18 +54,23 @@ public class SpringMainClass {
 
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
 
+        // 注册
         context.register(SpringMainClass.class);
 
+        // 启动
         context.refresh();
 
         String show = context.getBean("show", String.class);
 
         System.out.println("show: " + show);
+
+        context.close();
     }
 
-    private static void anno() {
-        // 派生注解
+    private static void ann() {
+
         ApplicationContext app = new ClassPathXmlApplicationContext("myBean.xml");
+        // 派生注解 + 自定义模式注解
         AnnotationDao ann = app.getBean("hy", AnnotationDao.class);
         System.out.println(ann.get());
 
@@ -84,7 +91,7 @@ public class SpringMainClass {
 
                 // 5 获取元注解
                 for (String bn : annotationMetadata.getMetaAnnotationTypes(an)) {
-                    System.out.println(AnnotationDao.class.getName() + " bn: " + bn);
+                    System.out.printf("注解 @%s 元标注 @%s\n", bn, an);
                 }
             }
         } catch (IOException e) {
