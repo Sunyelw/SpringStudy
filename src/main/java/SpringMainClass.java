@@ -2,6 +2,8 @@ import annotation.EnableHelloAnnotation;
 import annotation.EnableServer;
 import dto.AnnotationDao;
 import dto.inter.Server;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
@@ -10,9 +12,9 @@ import org.springframework.core.type.AnnotationMetadata;
 import org.springframework.core.type.classreading.CachingMetadataReaderFactory;
 import org.springframework.core.type.classreading.MetadataReader;
 import org.springframework.core.type.classreading.MetadataReaderFactory;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import java.io.IOException;
+import java.util.stream.Stream;
 
 /**
  * 项目名称:   pinkstone
@@ -22,14 +24,25 @@ import java.io.IOException;
  * 创建人:     huangyang
  * 创建时间:   2019/5/1 10:55
  */
+@SpringBootApplication
 @EnableHelloAnnotation
 @ComponentScan(basePackages = "annotation") // 需要开启扫描
 @EnableServer(type = Server.Type.HTTP) // Server.Type.FTP / Server.Type.HTTP
-@EnableWebMvc
 public class SpringMainClass {
 
     public static void main(String[] args){
-        InterfaceEnable();
+
+        ApplicationContext context = new AnnotationConfigApplicationContext(SpringMainClass.class);
+
+        Stream.of(context.getBeanDefinitionNames())
+                .map(name -> "\t" + name)
+                .forEach(System.out::println);
+//        InterfaceEnable();
+
+        // 启动
+        // SpringApplication.run(SpringMainClass.class, args);
+        new SpringApplicationBuilder(SpringMainClass.class).run(args).close();
+
     }
 
     // 基于接口驱动 @Enable 模块驱动开发
@@ -38,7 +51,7 @@ public class SpringMainClass {
         context.register(SpringMainClass.class);
         context.refresh();
 
-//        // debug 出来的 beanName
+//        debug 出来的 beanName
 //        Server server = context.getBean("dto.HttpServer", Server.class);
         // 直接通过 Class 获取 Bean
         Server server = context.getBean(Server.class);
