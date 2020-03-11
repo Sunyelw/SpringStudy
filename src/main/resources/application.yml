@@ -1,2 +1,1 @@
-# 正确加载
-spring_autoconfigure_exclude: load.LoadClass # 缺少配置
+spring_autoconfigure_exclude: load.LoadClass
