@@ -23,7 +23,7 @@
     </build>
 
     <properties>
-        <spring-base-version>5.1.5.RELEASE</spring-base-version>
+        <spring-base-version>5.3.19</spring-base-version>
         <aspectj-version>1.8.10</aspectj-version>
     </properties>
 
